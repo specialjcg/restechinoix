@@ -1,0 +1,6 @@
+projectKey=Decembre2019
+serverUrl=http://localhost:9000
+serverVersion=8.4.1.35646
+dashboardUrl=http://localhost:9000/dashboard?id=Decembre2019
+ceTaskId=AXPpD9HFt9qWxUR1ELYh
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXPpD9HFt9qWxUR1ELYh

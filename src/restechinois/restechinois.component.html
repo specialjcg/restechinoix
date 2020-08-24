@@ -1,0 +1,118 @@
+<div class="example-container" *ngFor="let i of list.list;let index = index; ">
+  <mat-chip color="primary"
+            class="example-box"
+  >
+    x=
+  </mat-chip>
+  <mat-form-field appearance="fill">
+    <mat-label>reste</mat-label>
+    <input name="reste" matInput [value]="i.reste" (change)="affectReste($event,index)">
+  </mat-form-field>
+  <mat-chip color="primary"
+            class="example-box"
+  >
+    congrue
+  </mat-chip>
+  <mat-form-field appearance="fill">
+
+    <mat-label>modulo</mat-label>
+    <input matInput [value]="i.modulo" (change)="affectModulo($event,index)">
+  </mat-form-field>
+
+  <mat-chip color="primary"
+            class="example-box"
+  >
+    M{{index + 1}} &nbsp;{{modulo}}/{{i.modulo}}&nbsp;={{modulo / i.modulo}}
+  </mat-chip>
+
+</div>
+<button mat-raised-button color="primary" (click)="addCongruence()">Add</button>
+<button mat-raised-button color="primary" (click)="calculModulo()">Calcul</button>
+<button mat-raised-button color="primary">résultat Modulo:{{modulo}}</button>
+<mat-chip-list
+  class="example-chip"
+
+>
+  <mat-chip
+    class="example-box"
+    color="primary"
+  >
+    <span>M &nbsp;{{multiply}}=</span>{{modulo}}
+  </mat-chip>
+</mat-chip-list>
+<mat-chip-list
+  class="example-chip"
+
+>
+  <mat-chip
+    class="example-box"
+
+  >x=&nbsp;
+    <span *ngFor="let i of list.list;let index = index; ">{{i.reste}}*{{modulo / i.modulo}}*y{{index + 1}}+</span>
+  </mat-chip>
+
+</mat-chip-list>
+<mat-chip
+  class="example-box"
+  [style.position]="'fixed'"
+  [style.top]="index*5+40+'vh'"
+  [style.left]="50+'vw'"
+  *ngFor="let i of list.list;let index = index; "
+>
+  <span *ngIf="list.list.length>1">On va chercher l’inverse de {{modulo / i.modulo}} dans Z{{i.modulo}}
+    =>   {{modulo / i.modulo}} u + {{i.modulo}} v = 1</span>
+  <span *ngIf="list.list.length>1">=> reste de {{modulo / i.modulo}}/{{i.modulo}} dans Z{{i.modulo}}
+    =>   {{resteModulo(modulo, i.modulo)}} u + {{i.modulo}} v = 1</span>
+
+
+</mat-chip>
+
+<mat-chip
+  class="example-box"
+  *ngIf="list.list.length>1"
+>
+
+
+  <span>On va utiliser l’algorithme d’Euclide étendu pour trouver u et v</span>
+</mat-chip>
+<mat-chip
+  class="example-box"
+  [style.position]="'fixed'"
+  [style.top]="index*5+55+'vh'"
+  [style.left]="0"
+  *ngFor="let i of list.list;let index = index;"
+
+>
+  <span *ngIf="list.list.length>1">{{i.modulo}}/{{resteModulo(modulo, i.modulo) }}= {{euclide(modulo, i.modulo)}}
+    => reste {{resteEuclide(modulo, i.modulo)}}&nbsp;
+    {{i.modulo}}={{euclide(modulo, i.modulo)}}*{{resteModulo(modulo, i.modulo) }}+{{resteEuclide(modulo, i.modulo)}}
+    => {{resteEuclide(modulo, i.modulo)}}={{i.modulo}}- {{euclide(modulo, i.modulo)}}
+    *{{resteModulo(modulo, i.modulo) }}</span>
+  &nbsp;
+
+</mat-chip>
+<mat-chip
+  class="example-box"
+  [style.position]="'fixed'"
+  [style.top]="index*5+75+'vh'"
+  [style.left]="10+'vw'"
+  *ngFor="let i of list.list;let index = index;"
+
+>
+  <span *ngIf="list.list.length>1">{{euclidextend(resteModulo(modulo, i.modulo), i.modulo)}}</span>
+
+
+</mat-chip>
+<mat-chip
+  class="example-box"
+  [style.position]="'fixed'"
+  [style.top]="75+'vh'"
+  [style.left]="0"
+
+
+>
+  <span
+    *ngIf="list.list.length>1">{{somme(this.list, modulo)}}==>{{reduction(this.list, modulo)}}</span>
+
+
+</mat-chip>
